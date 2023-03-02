@@ -7,14 +7,14 @@ readme = "README.md"
 packages = [{include = "django_jukebox", from = "src"},  {include = "django_jukebox_host", from = "src"}, {include = "django_jukebox_manage", from = "src"}]
 
 [tool.poetry.dependencies]
-django = "*"
-django-extensions = "*"
+python = ">=3.8"
 mutagen = "*"
 python-daemon = "*"
 django-otp = "*"
 simplejson = "*"
-python-ldap = "*"
-django-bower = "*"
+django = "^4.1.7"
+django-extensions = "^3.2.1"
+django-bower = "^5.2.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "*"
