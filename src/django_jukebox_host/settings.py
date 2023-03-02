@@ -45,6 +45,8 @@ CSRF_USE_SESSIONS = True
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
