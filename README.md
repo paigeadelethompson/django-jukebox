@@ -14,6 +14,7 @@ This was a fork containing some patches versus the original project at [Google C
 # Configuration
 - `export PATH=$HOME/.local/bin:$PATH`
 - `django_jukebox_admin migrate`
+- `django_jukebox_admin createsuperuser`
 - `django_jukebox_admin collectstatic`
 
 ## Data location 
