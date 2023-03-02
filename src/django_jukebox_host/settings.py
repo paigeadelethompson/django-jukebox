@@ -1,12 +1,14 @@
-import os
+import os, sys
 from pathlib import Path
+from .wrapping_paper import conf
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MAIN_PATH = BASE_DIR
-MEDIA_ROOT = MAIN_PATH / "media/"
-MUSIC_DIR_NAME = MAIN_PATH / 'music/'
-MUSIC_DIR = MEDIA_ROOT / MUSIC_DIR_NAME
-BOWER_COMPONENTS_ROOT = BASE_DIR / 'components'
+DOT_DIR = conf.get_dot_directory()
+MEDIA_ROOT = conf.create_dir_if_not_exists(DOT_DIR / "media")
+MUSIC_DIR_NAME = "music"
+MUSIC_DIR = conf.create_dir_if_not_exists(DOT_DIR / MUSIC_DIR_NAME)
+BOWER_COMPONENTS_ROOT = DOT_DIR / "components"
 
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
@@ -15,7 +17,7 @@ YUI_URL = 'http://yui.yahooapis.com/2.8.0r4/'
 LOGIN_REDIRECT_URL = '/'
 
 
-PROGRAM_NAME = "django-jukebox"
+PROGRAM_NAME = conf.get_name()
 RANDOM_REQ_GOOD_RATED_SONGS = 10
 RANDOM_REQ_GOOD_RATING = 3
 RANDOM_REQ_UPCOMING = 6
@@ -34,11 +36,11 @@ MANAGERS = ADMINS
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 USE_I18N = False
-SECRET_KEY = '=h#j0rha^hndrr$u6@8wc7=(08ntt_63d9-0q$*4hh$vyx-n0%'
+SECRET_KEY = None
 ROOT_URLCONF = 'django_jukebox_host.urls'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-DEBUG = True
-TEMPLATE_DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = False
 CSRF_USE_SESSIONS = True
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
@@ -46,7 +48,7 @@ ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': MAIN_PATH / 'db.sqlite3',
+        'NAME': DOT_DIR / 'db.sqlite3',
     }
 }
 
@@ -120,3 +122,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'djangobower.finders.BowerFinder',
 )
+
+sys.path.insert(0, str(conf.get_dot_directory()))
+from settings import *
+sys.path.pop(0)
