@@ -8,11 +8,11 @@ DOT_DIR = conf.get_dot_directory()
 MEDIA_ROOT = conf.create_dir_if_not_exists(DOT_DIR / "media")
 MUSIC_DIR_NAME = "music"
 MUSIC_DIR = conf.create_dir_if_not_exists(DOT_DIR / MUSIC_DIR_NAME)
-BOWER_COMPONENTS_ROOT = DOT_DIR / "components"
+STATIC_ROOT = conf.create_dir_if_not_exists(DOT_DIR / "static")
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 YUI_URL = 'http://yui.yahooapis.com/2.8.0r4/'
 LOGIN_REDIRECT_URL = '/'
 
@@ -39,8 +39,8 @@ USE_I18N = False
 SECRET_KEY = None
 ROOT_URLCONF = 'django_jukebox_host.urls'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = True
+TEMPLATE_DEBUG = True
 CSRF_USE_SESSIONS = True
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
@@ -52,11 +52,7 @@ DATABASES = {
     }
 }
 
-BOWER_INSTALLED_APPS = [
-    'prototype',
-]
-
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django_jukebox_host',
     'django_jukebox.accounts',
     'django_jukebox.juke_daemon',
@@ -73,16 +69,15 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.messages',
     'django_extensions',
-    'djangobower',
     'django_otp',
     'django_otp.plugins.otp_totp',
-)
+]
 
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-)
+]
 
-MIDDLEWARE = (
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -90,11 +85,11 @@ MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
-FILE_UPLOAD_HANDLERS = (
+FILE_UPLOAD_HANDLERS = [
     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
-)
+]
 
 TEMPLATE_LOADERS = [
     'django.template.loaders.filesystem.load_template_source',
@@ -116,12 +111,6 @@ TEMPLATES = [
         },
     },
 ]
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'djangobower.finders.BowerFinder',
-)
 
 sys.path.insert(0, str(conf.get_dot_directory()))
 from settings import *
