@@ -5,3 +5,6 @@ local_settings.py
 media/
 *.db3
 staticfiles/
+poetry.lock
+dist/
+*.sqlite3
