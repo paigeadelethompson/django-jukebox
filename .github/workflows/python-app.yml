@@ -29,8 +29,8 @@ jobs:
         poetry run python -c 'import subprocess, sys; (lambda p: p.returncode == 5 and sys.exit(0) or sys.exit(p.returncode))(subprocess.run("pytest"))'
         poetry build 
         pip install dist/*.whl
-        django_budget_admin makemigrations music_db
-        django_budget_admin makemigrations music_player
-        django_budget_admin migrate
-        django_budget_admin test
+        django_jukebox_admin makemigrations music_db
+        django_jukebox_admin makemigrations music_player
+        django_jukebox_admin migrate
+        django_jukebox_admin test
         
