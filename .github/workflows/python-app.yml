@@ -1,0 +1,36 @@
+name: flake8 / pytest
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+    steps:
+    - uses: actions/checkout@v3
+      with: 
+        submodules: recursive
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: "${{ matrix.python-version }}"
+    - name: Apt install dependencies
+      run: |
+        sudo apt update ; sudo apt-get -y install 
+    - name: Test
+      run: | 
+        pip install poetry
+        poetry install
+        poetry run python -c 'import subprocess, sys; (lambda p: p.returncode == 5 and sys.exit(0) or sys.exit(p.returncode))(subprocess.run("pytest"))'
+        poetry build 
+        pip install dist/*.whl
+        django_budget_admin makemigrations music_db
+        django_budget_admin makemigrations music_player
+        django_budget_admin migrate
+        django_budget_admin test
+        

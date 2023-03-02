@@ -17,6 +17,11 @@ simplejson = "^3.18.3"
 python-ldap = "^3.4.3"
 django-bower = "^5.2.0"
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+autopep8 = "^2.0.1"
+ipython = "^8.11.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
