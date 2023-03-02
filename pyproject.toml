@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "django_jukebox", from = "src"},  {include = "django_jukebox_host", from = "src"}, {include = "django_jukebox_manage", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.7"
 django = "^4.1.7"
 django-extensions = "^3.2.1"
 mutagen = "^1.46.0"
