@@ -3,6 +3,7 @@ Table-level operations.
 """
 from django.db import models
 
+
 class SongRequestManager(models.Manager):
     def get_active_requests(self):
         """
@@ -10,7 +11,7 @@ class SongRequestManager(models.Manager):
         played yet.
         """
         return self.filter(time_played__isnull=True)
-    
+
     def get_pending_user_requests(self):
         """
         Returns all pending requests that were sent by an authenticated User.

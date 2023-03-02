@@ -54,7 +54,7 @@ BOWER_INSTALLED_APPS = [
     'prototype',
 ]
 
-INSTALLED_APPS = (    
+INSTALLED_APPS = (
     'django_jukebox_host',
     'django_jukebox.accounts',
     'django_jukebox.juke_daemon',
@@ -72,6 +72,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django_extensions',
     'djangobower',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -82,7 +84,7 @@ MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',    
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

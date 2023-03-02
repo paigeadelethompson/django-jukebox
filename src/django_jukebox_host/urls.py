@@ -14,7 +14,7 @@ urlpatterns = [
     re_path(r'^', include(django_jukebox.music_player.urls)),
     re_path(r'^admin/', admin.site.urls),
 ]
- 
+
 if settings.DJANGO_SERVE_MEDIA:
     urlpatterns += [
         re_path(r'^media/(?P<path>.*)$', static_serve, {'document_root': settings.MEDIA_ROOT}),

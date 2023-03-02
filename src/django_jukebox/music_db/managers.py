@@ -5,6 +5,7 @@ from django.db import models
 from django.db.models import Q
 from django.conf import settings
 
+
 class SongManager(models.Manager):
     def get_active_requests(self):
         """
@@ -12,7 +13,7 @@ class SongManager(models.Manager):
         played yet.
         """
         return self.filter(time_played__isnull=True)
-    
+
     def get_good_songs(self):
         """
         Finds all songs that are 'good'.
@@ -21,7 +22,7 @@ class SongManager(models.Manager):
         return self.filter(allow_random_play=True,
                            rating__gte=settings.RANDOM_REQ_GOOD_RATING,
                            num_ratings__gt=settings.RANDOM_REQ_UPCOMING_MAX_RATINGS)
-    
+
     def get_upcoming_songs(self):
         """
         Find all 'upcoming' songs. This means that the songs
@@ -29,5 +30,5 @@ class SongManager(models.Manager):
         settings.RANDOM_REQ_UPCOMING_MAX_RATINGS.
         """
         return self.filter(Q(allow_random_play=True),
-                           Q(rating__isnull=True) | 
+                           Q(rating__isnull=True) |
                            Q(num_ratings__lte=settings.RANDOM_REQ_UPCOMING_MAX_RATINGS))

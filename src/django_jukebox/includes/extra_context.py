@@ -6,6 +6,7 @@ severe performance degradation in the case of a query.
 """
 from django.conf import settings
 
+
 def common_urls(request):
     """
     Populates some other common URLs.

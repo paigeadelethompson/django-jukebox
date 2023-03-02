@@ -1,6 +1,6 @@
 """
-This module contains the jukebox daemon server. The idea is to check for an 
-SongRequest objects that have no time_played value. The daemon will play each 
+This module contains the jukebox daemon server. The idea is to check for an
+SongRequest objects that have no time_played value. The daemon will play each
 of these in order via a simple loop.
 """
 import time
@@ -9,15 +9,16 @@ from subprocess import call
 from django.conf import settings
 from django_jukebox.music_player.models import SongRequest
 
+
 def play_song(request, requested_by_user=False):
     """
     Plays the song associated with a SongRequest object.
-    
+
     request: (SongRequest) The request to play.
     """
     request.time_played = datetime.datetime.now()
     request.save()
-    
+
     # Track the play on the Song object.
     song = request.song
     # This is set regardless of whether an authenticated User requested
@@ -28,10 +29,11 @@ def play_song(request, requested_by_user=False):
         # Only incremented by authenticated requests.
         song.request_count += 1
     request.song.save()
-    
+
     print("Playing: {}".format(request))
     cmd_list = settings.CLI_PLAYER_COMMAND_STR + [request.song.get_local_path()]
     call(cmd_list)
+
 
 def daemon_loop():
     """
