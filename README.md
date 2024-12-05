@@ -1,3 +1,6 @@
+# Shelved 
+until further notice 
+
 # django-jukebox #
 
 Web-based jukebox system written in Django.
